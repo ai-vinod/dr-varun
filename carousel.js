@@ -2,7 +2,7 @@
 class ReviewsCarousel {
     constructor() {
         this.currentSlide = 0;
-        this.totalSlides = 3; // 6 reviews / 2 reviews per slide = 3 slides
+        this.totalSlides = 6; // 12 reviews / 2 reviews per slide = 6 slides
         this.autoRotateInterval = null;
         this.init();
     }
@@ -114,7 +114,7 @@ class ReviewsCarousel {
     startAutoRotate() {
         this.autoRotateInterval = setInterval(() => {
             this.nextSlide();
-        }, 4000); // Rotate every 4 seconds
+        }, 3000); // Rotate every 3 seconds
     }
 
     stopAutoRotate() {

@@ -1,16 +1,52 @@
-// YouTube API Configuration
-// To get a YouTube API key:
-// 1. Go to https://console.developers.google.com/
-// 2. Create a new project or select existing one
-// 3. Enable YouTube Data API v3
-// 4. Create credentials (API key)
-// 5. Replace 'YOUR_API_KEY_HERE' with your actual API key
-const YOUTUBE_API_KEY = 'YOUR_API_KEY_HERE'; // Replace with actual API key
-const CHANNEL_HANDLE = '@Dr.VarunPaediatrican'; // YouTube channel handle
-const MAX_RESULTS = 12;
+// Static video data - no API key required
+// Add your YouTube video IDs and details here
+const STATIC_VIDEOS = [
+    {
+        id: 'zOps9XmBTO0', // Replace with actual video ID
+        title: 'My baby is 1 year old… still asking for breastmilk. Should I continue?”',
+        description: 'Yes! Breastfeeding after 1 year is still super useful.🍽️ But solids are also important for full nutrition.🌙 At night, breastmilk is better than cow’s milk – boosts immunity & bonding!🍼 Breastfeed + give solids = best combo!',
+        publishedAt: '2024-01-15T10:00:00Z',
+        thumbnail: 'https://img.youtube.com/vi/zOps9XmBTO0/maxresdefault.jpg'
+    },
+    {
+        id: 'xVLB4S257vE', // Replace with actual video ID
+        title: '👶 Sometimes, when babies sleep, you hear a "Gor Gor" sound.Is it normal or abnormal?🩺',
+        description: 'Most of the time, it’s normal — babies have narrow airways, and even a little mucus or fast breathing can cause turbulence, leading to that sound.⚠️ But if it comes with fever, fast breathing, poor feeding, or the baby seems very drowsy — that’s abnormal.In such cases, it’s best to consult a pediatrician.',
+        publishedAt: '2024-01-10T14:30:00Z',
+        thumbnail: 'https://img.youtube.com/vi/xVLB4S257vE/maxresdefault.jpg'
+    },
+    {
+        id: 'i9uzRu_a1Dc', // Replace with actual video ID
+        title: 'When should you start solid foods for your baby?',
+        description: 'Is your baby ready for complementary feeding? Many parents are confused about the right time to introduce solid foods.',
+        publishedAt: '2024-01-05T09:15:00Z',
+        thumbnail: 'https://img.youtube.com/vi/i9uzRu_a1Dc/maxresdefault.jpg'
+    },
+    {
+        id: 'w2LP-7z0a48', // Replace with actual video ID
+        title: 'Did you know newborns should NOT be given honey or water? 🚫',
+        description: 'reastmilk has enough water to keep them hydrated, and honey can cause botulism! 🍼❌ Keep your little one safe—no honey until they turn 1! 👶❤️',
+        publishedAt: '2023-12-28T16:45:00Z',
+        thumbnail: 'https://img.youtube.com/vi/w2LP-7z0a48/maxresdefault.jpg'
+    },
+    {
+        id: 'mzJo5pGlLB0', // Replace with actual video ID
+        title: 'Egg white or yolk first? 🥚 Many parents are unsure about introducing eggs to their babies!',
+        description: 'The right way and timing matter to ensure easy digestion and avoid allergies. Ready to make mealtime nutritious and safe for your little one? 🍳👶',
+        publishedAt: '2023-12-20T11:20:00Z',
+        thumbnail: 'https://img.youtube.com/vi/mzJo5pGlLB0/maxresdefault.jpg'
+    },
+    {
+        id: 'b-UPTVfYuxA', // Replace with actual video ID
+        title: 'Foods to avoid till 1 year! 🚫🍯🥛🌰🍇🍿',
+        description: 'Giving certain foods before 1 year can be dangerous. Listen carefully!👶 First – Honey: Risk of botulism (a type of food poisoning).👶 Second – Cow’s Milk: Protein mismatch can cause digestion issues.👶 Third – Choking hazards: Avoid nuts, grapes, popcorn, puffed rice, etc. If giving nuts, make it into a fine paste or porridge.Feed safe foods and feed them safely! 🍼❤️',
+        publishedAt: '2023-12-15T13:10:00Z',
+        thumbnail: 'https://img.youtube.com/vi/b-UPTVfYuxA/maxresdefault.jpg'
+    }
+];
 
-let nextPageToken = '';
-let isLoading = false;
+let currentVideoIndex = 0;
+const VIDEOS_PER_LOAD = 3;
 
 // DOM Elements
 const loadingContainer = document.getElementById('loading');
@@ -38,7 +74,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // Load initial videos
-    loadVideos();
+    loadStaticVideos();
     
     // Event listeners
     loadMoreBtn.addEventListener('click', loadMoreVideos);
@@ -57,82 +93,21 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// Load videos from YouTube API
-async function loadVideos(pageToken = '') {
-    if (isLoading) return;
+// Load static videos (no API required)
+function loadStaticVideos() {
+    hideLoading();
+    errorContainer.style.display = 'none';
     
-    isLoading = true;
-    showLoading();
+    // Load initial videos
+    const initialVideos = STATIC_VIDEOS.slice(0, VIDEOS_PER_LOAD);
+    displayVideos(initialVideos, false);
+    currentVideoIndex = VIDEOS_PER_LOAD;
     
-    try {
-        // Check if API key is configured
-        if (YOUTUBE_API_KEY === 'YOUR_API_KEY_HERE') {
-            throw new Error('YouTube API key not configured');
-        }
-        
-        // First get the channel ID from the handle
-        const channelResponse = await fetch(`https://www.googleapis.com/youtube/v3/channels?key=${YOUTUBE_API_KEY}&forHandle=${CHANNEL_HANDLE}&part=id`);
-        
-        if (!channelResponse.ok) {
-            throw new Error(`Failed to get channel ID: ${channelResponse.status}`);
-        }
-        
-        const channelData = await channelResponse.json();
-        
-        if (!channelData.items || channelData.items.length === 0) {
-            throw new Error('Channel not found');
-        }
-        
-        const channelId = channelData.items[0].id;
-        
-        // Now get the videos from the channel
-        const url = `https://www.googleapis.com/youtube/v3/search?key=${YOUTUBE_API_KEY}&channelId=${channelId}&part=snippet,id&order=date&maxResults=${MAX_RESULTS}&type=video${pageToken ? `&pageToken=${pageToken}` : ''}`;
-        
-        const response = await fetch(url);
-        
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        
-        const data = await response.json();
-        
-        if (data.items && data.items.length > 0) {
-            // Get video details including duration
-            const videoIds = data.items.map(item => item.id.videoId).join(',');
-            const detailsUrl = `https://www.googleapis.com/youtube/v3/videos?key=${YOUTUBE_API_KEY}&id=${videoIds}&part=contentDetails,statistics`;
-            
-            const detailsResponse = await fetch(detailsUrl);
-            const detailsData = await detailsResponse.json();
-            
-            // Combine video data with details
-            const videosWithDetails = data.items.map(video => {
-                const details = detailsData.items.find(detail => detail.id === video.id.videoId);
-                return {
-                    ...video,
-                    duration: details ? details.contentDetails.duration : 'PT0S',
-                    viewCount: details ? details.statistics.viewCount : '0'
-                };
-            });
-            
-            displayVideos(videosWithDetails, pageToken !== '');
-            nextPageToken = data.nextPageToken || '';
-            
-            // Show/hide load more button
-            if (nextPageToken) {
-                loadMoreContainer.style.display = 'block';
-            } else {
-                loadMoreContainer.style.display = 'none';
-            }
-            
-            hideLoading();
-        } else {
-            throw new Error('No videos found');
-        }
-    } catch (error) {
-        console.error('Error loading videos:', error);
-        showError();
-    } finally {
-        isLoading = false;
+    // Show/hide load more button
+    if (currentVideoIndex < STATIC_VIDEOS.length) {
+        loadMoreContainer.style.display = 'block';
+    } else {
+        loadMoreContainer.style.display = 'none';
     }
 }
 
@@ -156,30 +131,26 @@ function createVideoCard(video) {
     card.className = 'video-card';
     card.setAttribute('data-aos', 'fade-up');
     
-    const publishedDate = new Date(video.snippet.publishedAt).toLocaleDateString('en-US', {
+    const publishedDate = new Date(video.publishedAt).toLocaleDateString('en-US', {
         year: 'numeric',
         month: 'short',
         day: 'numeric'
     });
     
-    const duration = formatDuration(video.duration);
-    const thumbnail = video.snippet.thumbnails.high?.url || video.snippet.thumbnails.medium?.url || video.snippet.thumbnails.default?.url;
-    
     card.innerHTML = `
         <div class="video-thumbnail">
-            <img src="${thumbnail}" alt="${escapeHtml(video.snippet.title)}" loading="lazy">
+            <img src="${video.thumbnail}" alt="${escapeHtml(video.title)}" loading="lazy">
             <div class="play-button">
                 <i class="fas fa-play"></i>
             </div>
         </div>
         <div class="video-info">
-            <h3 class="video-title">${escapeHtml(video.snippet.title)}</h3>
-            <p class="video-description">${escapeHtml(video.snippet.description)}</p>
+            <h3 class="video-title">${escapeHtml(video.title)}</h3>
+            <p class="video-description">${escapeHtml(video.description)}</p>
             <div class="video-meta">
                 <span class="video-date">
                     <i class="fas fa-calendar"></i> ${publishedDate}
                 </span>
-                <span class="video-duration">${duration}</span>
             </div>
         </div>
     `;
@@ -223,8 +194,15 @@ function closeModal() {
 
 // Load more videos
 function loadMoreVideos() {
-    if (nextPageToken && !isLoading) {
-        loadVideos(nextPageToken);
+    if (currentVideoIndex < STATIC_VIDEOS.length) {
+        const nextVideos = STATIC_VIDEOS.slice(currentVideoIndex, currentVideoIndex + VIDEOS_PER_LOAD);
+        displayVideos(nextVideos, true);
+        currentVideoIndex += VIDEOS_PER_LOAD;
+        
+        // Hide load more button if no more videos
+        if (currentVideoIndex >= STATIC_VIDEOS.length) {
+            loadMoreContainer.style.display = 'none';
+        }
     }
 }
 
@@ -255,23 +233,7 @@ function showError() {
     loadMoreContainer.style.display = 'none';
 }
 
-// Format video duration from ISO 8601 to readable format
-function formatDuration(duration) {
-    if (!duration || duration === 'PT0S') return '0:00';
-    
-    const match = duration.match(/PT(\d+H)?(\d+M)?(\d+S)?/);
-    if (!match) return '0:00';
-    
-    const hours = parseInt(match[1]) || 0;
-    const minutes = parseInt(match[2]) || 0;
-    const seconds = parseInt(match[3]) || 0;
-    
-    if (hours > 0) {
-        return `${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-    } else {
-        return `${minutes}:${seconds.toString().padStart(2, '0')}`;
-    }
-}
+// Duration formatting removed - not needed for static videos
 
 // Escape HTML to prevent XSS
 function escapeHtml(text) {
@@ -285,74 +247,4 @@ function escapeHtml(text) {
     return text.replace(/[&<>"']/g, function(m) { return map[m]; });
 }
 
-// Fallback: Display static content if API fails
-function displayFallbackContent() {
-    videosGrid.innerHTML = `
-        <div class="video-card" data-aos="fade-up">
-            <div class="video-thumbnail">
-                <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg" alt="Sample Video" loading="lazy">
-                <div class="play-button">
-                    <i class="fas fa-play"></i>
-                </div>
-            </div>
-            <div class="video-info">
-                <h3 class="video-title">Pediatric Care Tips</h3>
-                <p class="video-description">Essential tips for pediatric care and child health management.</p>
-                <div class="video-meta">
-                    <span class="video-date">
-                        <i class="fas fa-calendar"></i> Jan 15, 2025
-                    </span>
-                    <span class="video-duration">5:30</span>
-                </div>
-            </div>
-        </div>
-        <div class="video-card" data-aos="fade-up" data-aos-delay="100">
-            <div class="video-thumbnail">
-                <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg" alt="Sample Video" loading="lazy">
-                <div class="play-button">
-                    <i class="fas fa-play"></i>
-                </div>
-            </div>
-            <div class="video-info">
-                <h3 class="video-title">Child Nutrition Guidelines</h3>
-                <p class="video-description">Comprehensive guide to proper nutrition for growing children.</p>
-                <div class="video-meta">
-                    <span class="video-date">
-                        <i class="fas fa-calendar"></i> Jan 10, 2025
-                    </span>
-                    <span class="video-duration">8:45</span>
-                </div>
-            </div>
-        </div>
-        <div class="video-card" data-aos="fade-up" data-aos-delay="200">
-            <div class="video-thumbnail">
-                <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg" alt="Sample Video" loading="lazy">
-                <div class="play-button">
-                    <i class="fas fa-play"></i>
-                </div>
-            </div>
-            <div class="video-info">
-                <h3 class="video-title">Emergency Pediatric Care</h3>
-                <p class="video-description">What to do in pediatric emergency situations and when to seek help.</p>
-                <div class="video-meta">
-                    <span class="video-date">
-                        <i class="fas fa-calendar"></i> Jan 5, 2025
-                    </span>
-                    <span class="video-duration">12:20</span>
-                </div>
-            </div>
-        </div>
-    `;
-    
-    videosGrid.style.display = 'grid';
-    loadingContainer.style.display = 'none';
-    
-    // Add click events for fallback content
-    const fallbackCards = videosGrid.querySelectorAll('.video-card');
-    fallbackCards.forEach(card => {
-        card.addEventListener('click', () => {
-            // Redirect to YouTube channel
-            window.open('https://www.youtube.com/@Dr.VarunPaediatrican', '_blank');
-        });
-    });
-}
+// Fallback content function removed - not needed for static videos

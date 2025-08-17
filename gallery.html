@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery - Dr. Varun Sundarrajan | Photos</title>
+    <meta name="description" content="Gallery showcasing Dr. Varun Sundarrajan's medical practice and achievements.">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Skip to main content link for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <!-- Navigation -->
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html"><h3>Dr. Varun Sundarrajan</h3></a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#experience">Experience</a></li>
+                <li><a href="index.html#services">Services</a></li>
+                <li><a href="gallery.html" class="active">Gallery</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="videos.html">Videos</a></li>
+                <li><a href="index.html#contact" class="cta-button">Book Appointment</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main id="main-content">
+        <!-- Hero Section -->
+        <section class="gallery-hero">
+            <div class="hero-background">
+                <div class="floating-shapes">
+                    <div class="shape shape-1"></div>
+                    <div class="shape shape-2"></div>
+                    <div class="shape shape-3"></div>
+                    <div class="shape shape-4"></div>
+                </div>
+            </div>
+            <div class="hero-content">
+                <div class="hero-text" data-aos="fade-up" data-aos-duration="1000">
+                    <p>A glimpse into my medical practice and professional journey in pediatric care</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery Section -->
+        <section class="gallery-section">
+            <div class="container">
+                <h2 data-aos="fade-up">Photo Gallery</h2>
+                <p class="gallery-description" data-aos="fade-up" data-aos-delay="200">
+                    Explore moments from my medical practice, professional achievements, and dedication to pediatric healthcare.
+                </p>
+                
+                <!-- Image Carousel -->
+                <div class="carousel-container" data-aos="fade-up" data-aos-delay="400">
+                    <div class="carousel">
+                        <div class="carousel-track">
+                            <div class="carousel-slide active">
+                                <img src="images/varun-1.jpeg" alt="Dr. Varun Sundarrajan - Professional Photo 1" loading="lazy">
+                                <div class="slide-caption">
+                                    <h3>Professional Practice</h3>
+                                    <p>Dedicated to providing exceptional pediatric care</p>
+                                </div>
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="images/varun-2.jpeg" alt="Dr. Varun Sundarrajan - Professional Photo 2" loading="lazy">
+                                <div class="slide-caption">
+                                    <h3>Medical Excellence</h3>
+                                    <p>Committed to the highest standards of healthcare</p>
+                                </div>
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="images/varun-3.jpeg" alt="Dr. Varun Sundarrajan - Professional Photo 3" loading="lazy">
+                                <div class="slide-caption">
+                                    <h3>Patient Care</h3>
+                                    <p>Compassionate approach to children's health</p>
+                                </div>
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="images/varun-4.jpeg" alt="Dr. Varun Sundarrajan - Professional Photo 4" loading="lazy">
+                                <div class="slide-caption">
+                                    <h3>Professional Development</h3>
+                                    <p>Continuous learning and medical advancement</p>
+                                </div>
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="images/varun-5.jpeg" alt="Dr. Varun Sundarrajan - Professional Photo 5" loading="lazy">
+                                <div class="slide-caption">
+                                    <h3>Healthcare Leadership</h3>
+                                    <p>Leading pediatric care with expertise and compassion</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Navigation Arrows -->
+                        <button class="carousel-btn carousel-btn-prev" aria-label="Previous image">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="carousel-btn carousel-btn-next" aria-label="Next image">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                        
+                        <!-- Dots Indicator -->
+                        <div class="carousel-dots">
+                            <button class="dot active" data-slide="0" aria-label="Go to slide 1"></button>
+                            <button class="dot" data-slide="1" aria-label="Go to slide 2"></button>
+                            <button class="dot" data-slide="2" aria-label="Go to slide 3"></button>
+                            <button class="dot" data-slide="3" aria-label="Go to slide 4"></button>
+                            <button class="dot" data-slide="4" aria-label="Go to slide 5"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact CTA Section -->
+        <section class="gallery-cta">
+            <div class="container">
+                <div class="cta-content" data-aos="fade-up">
+                    <h2>Ready to Schedule an Appointment?</h2>
+                    <p>Experience compassionate pediatric care with Dr. Varun Sundarrajan</p>
+                    <a href="index.html#contact" class="cta-button">
+                        <i class="fas fa-calendar-alt"></i>
+                        Book Appointment
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                     <h3>Dr. Varun Sundarrajan</h3>
+                     <p>DCH, DNB (Pediatrics) - Providing comprehensive pediatric and neonatal care with 18 years of experience.</p>
+                     <div class="social-links">
+                         <a href="https://www.instagram.com/drvarunsundar/" target="_blank" style="color: #E4405F;"><i class="fab fa-instagram"></i></a>
+                         <a href="https://www.linkedin.com/in/dr-varun-sundarrajan-274a3221" target="_blank" style="color: #0077B5;"><i class="fab fa-linkedin"></i></a>
+                         <a href="https://www.youtube.com/@Dr.VarunPaediatrican" target="_blank" style="color: #FF0000;"><i class="fab fa-youtube"></i></a>
+                         <a href="https://www.google.com/maps/place/Dr.+Varun+Sundarrajan+-+Child+specialist,+Salem/data=!4m2!3m1!1s0x0:0xb9e5d52e00581d95?sa=X&ved=1t:2428&ictx=111" target="_blank" style="color: #4285F4;"><i class="fas fa-map-marker-alt"></i></a>
+                     </div>
+                 </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html#home">Home</a></li>
+                        <li><a href="index.html#about">About</a></li>
+                        <li><a href="index.html#services">Services</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Important Pages</h4>
+                    <ul>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="videos.html">Videos</a></li>
+                        <li><a href="index.html#experience">Experience</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <p><i class="fas fa-phone" style="color: #4CAF50;"></i> +91 9363633099</p>
+                    <p><i class="fas fa-envelope" style="color: #FF9800;"></i> consult@drvarunsundar.com</p>
+                    <p><i class="fas fa-map-marker-alt" style="color: #F44336;"></i> Devi Hospital, Salem</p>
+                    <p><i class="fas fa-clock" style="color: #2196F3;"></i> Mon-Sat: 9AM-1:30PM, 4:30-7:30PM</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Dr. Varun. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script src="script.js"></script>
+    <script src="gallery.js"></script>
+</body>
+</html>
