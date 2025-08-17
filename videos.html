@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Videos - Dr. Varun Sundarrajan | Educational Content</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Skip to main content link for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <!-- Navigation -->
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html"><h3>Dr. Varun Sundarrajan</h3></a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#experience">Experience</a></li>
+                <li><a href="index.html#certifications">Certifications</a></li>
+                <li><a href="index.html#services">Services</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="videos.html" class="active">Videos</a></li>
+                <li><a href="index.html#contact" class="cta-button">Book Appointment</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main id="main-content">
+        <!-- Hero Section -->
+        <section class="videos-hero">
+            <div class="hero-background">
+                <div class="floating-shapes">
+                    <div class="shape shape-1"></div>
+                    <div class="shape shape-2"></div>
+                    <div class="shape shape-3"></div>
+                    <div class="shape shape-4"></div>
+                </div>
+            </div>
+            <div class="hero-content">
+                <div class="hero-text" data-aos="fade-up" data-aos-duration="1000">
+                    <h1>Educational Videos</h1>
+                    <h2>Expert Pediatric Care Insights</h2>
+                    <p>Watch our collection of educational videos covering pediatric care, child health tips, and expert medical advice from Dr. Varun Sundarrajan.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Wave Divider -->
+        <div class="wave-divider">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+                <path fill="#87CEFA" fill-opacity="1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,138.7C960,139,1056,117,1152,117.3C1248,117,1344,139,1392,149.3L1440,160L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path>
+            </svg>
+        </div>
+
+        <!-- Videos Section -->
+        <section class="videos-section">
+            <div class="container">
+                <div class="section-header" data-aos="fade-up">
+                    <h2>Latest Videos</h2>
+                    <p>Stay informed with our latest educational content on pediatric care and child health.</p>
+                </div>
+                
+                <!-- Loading State -->
+                <div id="loading" class="loading-container">
+                    <div class="loading-spinner"></div>
+                    <p>Loading videos...</p>
+                </div>
+                
+                <!-- Error State -->
+                <div id="error" class="error-container" style="display: none;">
+                    <div class="error-message">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <h3>Unable to Load Videos</h3>
+                        <p>Please visit our <a href="https://www.youtube.com/@Dr.VarunPaediatrican" target="_blank">YouTube channel</a> directly to watch our latest content.</p>
+                    </div>
+                </div>
+                
+                <!-- Videos Grid -->
+                <div id="videos-grid" class="videos-grid" style="display: none;">
+                    <!-- Videos will be dynamically loaded here -->
+                </div>
+                
+                <!-- Load More Button -->
+                <div class="load-more-container" style="display: none;">
+                    <button id="load-more" class="load-more-btn">
+                        <i class="fas fa-plus"></i> Load More Videos
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Video Modal -->
+    <div id="video-modal" class="video-modal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <div class="modal-video-container">
+                <iframe id="modal-video" src="" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <div class="modal-info">
+                <h3 id="modal-title"></h3>
+                <p id="modal-description"></p>
+                <div class="modal-meta">
+                    <span id="modal-date"></span>
+                    <a id="modal-youtube-link" href="" target="_blank">
+                        <i class="fab fa-youtube"></i> Watch on YouTube
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                     <h3>Dr. Varun Sundarrajan</h3>
+                     <p>DCH, DNB (Pediatrics) - Providing comprehensive pediatric and neonatal care with 18 years of experience.</p>
+                     <div class="social-links">
+                         <a href="https://www.instagram.com/drvarunsundar/" target="_blank" style="color: #E4405F;"><i class="fab fa-instagram"></i></a>
+                         <a href="https://www.linkedin.com/in/dr-varun-sundarrajan-274a3221" target="_blank" style="color: #0077B5;"><i class="fab fa-linkedin"></i></a>
+                         <a href="https://www.youtube.com/@Dr.VarunPaediatrican" target="_blank" style="color: #FF0000;"><i class="fab fa-youtube"></i></a>
+                         <a href="https://www.google.com/maps/place/Dr.+Varun+Sundarrajan+-+Child+specialist,+Salem/data=!4m2!3m1!1s0x0:0xb9e5d52e00581d95?sa=X&ved=1t:2428&ictx=111" target="_blank" style="color: #4285F4;"><i class="fas fa-map-marker-alt"></i></a>
+                     </div>
+                 </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html#about">About</a></li>
+                        <li><a href="index.html#services">Services</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                        <li><a href="videos.html">Videos</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Services</h4>
+                    <ul>
+                        <li>Pediatric Care</li>
+                        <li>Neonatology</li>
+                        <li>Pediatric Nutrition Counseling</li>
+                        <li>Emergency Care</li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <p><i class="fas fa-phone" style="color: #4CAF50;"></i> +91 9363633099</p>
+                    <p><i class="fas fa-envelope" style="color: #FF9800;"></i> consult@drvarunsundar.com</p>
+                    <p><i class="fas fa-map-marker-alt" style="color: #F44336;"></i> Devi Hospital, Salem</p>
+                    <p><i class="fas fa-clock" style="color: #2196F3;"></i> Mon-Sat: 9AM-1:30PM, 4:30-7:30PM</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Dr. Varun. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script src="script.js"></script>
+    <script src="videos.js"></script>
+</body>
+</html>
