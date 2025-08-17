@@ -28,18 +28,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Update carousel position
     function updateCarousel() {
-        // Remove active class from all slides and dots
-        slides.forEach(slide => slide.classList.remove('active'));
+        // Remove active class from all dots
         dots.forEach(dot => dot.classList.remove('active'));
 
-        // Add active class to current slide and dot
-        slides[currentSlide].classList.add('active');
+        // Add active class to current dot
         if (dots[currentSlide]) {
             dots[currentSlide].classList.add('active');
         }
 
         // Move the track
-        const translateX = -currentSlide * 100;
+        const translateX = -currentSlide * 20; // 20% per slide since each slide is 20% width
         track.style.transform = `translateX(${translateX}%)`;
     }
 
