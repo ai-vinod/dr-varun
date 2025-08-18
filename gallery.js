@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         // Move the track
-        const translateX = -currentSlide * 20; // 20% per slide since each slide is 20% width
+        const translateX = -currentSlide * 12.5; // 12.5% per slide since each slide is 12.5% width
         track.style.transform = `translateX(${translateX}%)`;
     }
 
