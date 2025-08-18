@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        .test-image {
+            width: 300px;
+            height: 200px;
+            object-fit: cover;
+            margin: 10px;
+            border: 2px solid #ccc;
+            display: block;
+        }
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Image Loading Test</h1>
+    <p>Testing if gallery images are accessible:</p>
+    
+    <h3>Image 1:</h3>
+    <img src="images/Varun-1.jpeg" alt="Varun 1" class="test-image" onerror="this.nextElementSibling.style.display='block'">
+    <div class="error" style="display:none">❌ Failed to load: images/Varun-1.jpeg</div>
+    
+    <h3>Image 2:</h3>
+    <img src="images/Varun-2.jpeg" alt="Varun 2" class="test-image" onerror="this.nextElementSibling.style.display='block'">
+    <div class="error" style="display:none">❌ Failed to load: images/Varun-2.jpeg</div>
+    
+    <h3>Image 3:</h3>
+    <img src="images/Varun-3.jpeg" alt="Varun 3" class="test-image" onerror="this.nextElementSibling.style.display='block'">
+    <div class="error" style="display:none">❌ Failed to load: images/Varun-3.jpeg</div>
+    
+    <h3>Image 4:</h3>
+    <img src="images/Varun-4.jpeg" alt="Varun 4" class="test-image" onerror="this.nextElementSibling.style.display='block'">
+    <div class="error" style="display:none">❌ Failed to load: images/Varun-4.jpeg</div>
+    
+    <h3>Image 5:</h3>
+    <img src="images/Varun-5.jpeg" alt="Varun 5" class="test-image" onerror="this.nextElementSibling.style.display='block'">
+    <div class="error" style="display:none">❌ Failed to load: images/Varun-5.jpeg</div>
+    
+    <script>
+        // Check if images loaded successfully
+        window.addEventListener('load', function() {
+            const images = document.querySelectorAll('.test-image');
+            let loadedCount = 0;
+            
+            images.forEach(img => {
+                if (img.complete && img.naturalHeight !== 0) {
+                    loadedCount++;
+                }
+            });
+            
+            console.log(`${loadedCount} out of ${images.length} images loaded successfully`);
+            
+            if (loadedCount === images.length) {
+                document.body.insertAdjacentHTML('beforeend', '<div style="color: green; font-weight: bold; margin-top: 20px;">✅ All images loaded successfully!</div>');
+            } else {
+                document.body.insertAdjacentHTML('beforeend', '<div style="color: red; font-weight: bold; margin-top: 20px;">❌ Some images failed to load. Check file paths and permissions.</div>');
+            }
+        });
+    </script>
+</body>
+</html>
